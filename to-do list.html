@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="png" href="to do logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Roboto:ital,wght@0,400;1,500&display=swap" rel="stylesheet">
+    <title>To-Do list</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            height: 100vh;
+            position: relative;
+        }
+        .fill{
+            position: absolute;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, white,rgb(249, 86, 86));
+            overflow: hidden;
+        }
+        
+        .box1,.box2,.box3,.box4,.box5,.box6,.box7,.box8{
+            position: absolute;
+            background: rgba(202, 19, 19, 0.2);
+            border: 2px solid rgb(194, 40, 40);
+            box-shadow: 0 0 15px rgba(255, 105, 105, 0.7);
+        }
+        .box1{
+            height: 80px;
+            width: 80px;
+            left: 50%;
+            bottom: -15%;
+            animation: move1 15s linear infinite;
+        }
+        .box2{
+            height: 120px;
+            width: 120px;
+            left: 30%;
+            bottom: -10%;
+            animation: move2 15s linear infinite;
+        }
+        .box3{
+            height: 50px;
+            width: 50px;
+            left: 60%;
+            bottom: -20%;
+            animation: move2 15s linear infinite;
+        }
+        .box4{
+            height: 60px;
+            width: 60px;
+            left: 70%;
+            bottom: -10%;
+            animation: move1 15s linear infinite;  
+        }
+        .box5{
+            height: 100px;
+            width: 100px;
+            left: 20%;
+            bottom: -15%;
+            animation: move1 15s linear infinite;
+        }
+        .box6{
+            height: 80px;
+            width: 80px;
+            right: 18%;
+            bottom: -10%;
+            animation: move3 15s linear infinite;
+        }
+        .box7{
+            height: 100px;
+            width: 100px;
+            right: 10%;
+            bottom: -20%;
+            animation: move2 15s linear infinite;
+        }
+        .box8{
+            height: 90px;
+            width: 90px;
+            left: 10%;
+            bottom: -5%;
+            animation: move2 15s linear infinite;
+        }
+        @keyframes move1 {
+            0% {
+                transform:  translateY(0) rotateZ(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-500px) rotateZ(360deg);
+                opacity: 0;
+            }
+        }
+        @keyframes move2 {
+            0% {
+                transform:  translateY(0) rotateZ(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-500px) rotateZ(300deg);
+                opacity: 0;
+            }
+        }
+        @keyframes move3 {
+            0% {
+                transform:  translateY(0) rotateZ(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-500px) rotateZ(250deg);
+                opacity: 0;
+            }
+        }
+        @media (max-width: 1024px) {
+            .box1 { height: 60px; width: 60px; left: 45%; }
+            .box2 { height: 90px; width: 90px; left: 25%; }
+            .box3 { height: 40px; width: 40px; left: 55%; }
+            .box4 { height: 50px; width: 50px; left: 65%; }
+            .box5 { height: 80px; width: 80px; left: 15%; }
+            .box6 { height: 60px; width: 60px; right: 12%; }
+            .box7 { height: 80px; width: 80px; right: 5%; }
+            .box8 { height: 70px; width: 70px; left: 5%; }
+        }
+
+        @media (max-width: 600px) {
+            .box1 { height: 40px; width: 40px; left: 40%; }
+            .box2 { height: 60px; width: 60px; left: 20%; }
+            .box3 { height: 30px; width: 30px; left: 50%; }
+            .box4 { height: 40px; width: 40px; left: 60%; }
+            .box5 { height: 50px; width: 50px; left: 10%; }
+            .box6 { height: 40px; width: 40px; right: 10%; }
+            .box7 { height: 60px; width: 60px; right: 3%; }
+            .box8 { height: 50px; width: 50px; left: 3%; }
+        }
+
+        .top-content {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 10; 
+            display: flex; 
+            justify-content: center;
+            align-items: center;
+            background: transparent;
+        }
+
+        .container {
+            height: 500px;
+            width: 400px;
+            background-color: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(2px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .container .title{
+            font-family: "Bangers", system-ui;
+            letter-spacing: 10px;
+            font-size: 30px;
+            color: white;
+            background-color: rgba(255, 0, 0, 0.648);
+            padding: 10px;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+        }
+
+        .task-list{
+            height: 65%;
+            margin: 10px;
+            padding: 5px 10px;
+            overflow-y: auto;
+            
+        }
+       
+        .task{
+            width: 100%;
+            padding: 5px 10px;
+            margin: 10px 0px;
+            border-radius: 10px;
+            flex-grow: 1;
+            background: rgba(255, 255, 255, 0.25); 
+            border-left: 5px solid #ff5e5e; 
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+            display: flex;
+        }
+        .task .desc{
+            font-family: "Roboto", sans-serif;
+            text-align: left;
+            color: #2c2c2c; 
+            font-size: 13px;
+            width:90%;
+            display: flex;
+            align-items: center;
+        }
+        .delete {
+            box-sizing: border-box;
+            display: flex;
+            padding: 0;
+            justify-content: center;
+            align-items: center;
+            width: 10%;
+            height: 80%;
+            border-radius: 50%;
+            border: 2px solid red;
+            background: transparent;
+            color: red;
+            font-size: 25px;
+            transition:transform 0.5s ease;
+            z-index: 11;
+            box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+        }
+        .delete abbr{
+            text-decoration: none;
+        }
+        .delete:hover{
+            cursor: pointer;
+        }
+        .delete:active{
+            transform: scale(1.1) translateY(-2px);
+            
+        }
+        .add-btn{
+            height: 40px;
+            width: 40px;
+            background: transparent;
+            font-size: 35px;
+            border-radius: 50%;
+            border:2px solid red;
+            color: red;
+            z-index: 11;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+            transition: transform 0.5s ease;
+        }
+        .add-btn:hover{
+            cursor: pointer;
+            transform: scale(1.2);
+        }
+        .add-btn:active{
+            transform: translateY(-5px);
+        }
+        .add-btn abbr{
+            text-decoration: none;
+        }
+        .btn{
+            margin-top: 10px;
+
+        }
+
+
+        .task-list::-webkit-scrollbar {
+            width: 10px; 
+        }
+
+        .task-list::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.454); 
+            border-radius: 10px;
+        }
+
+        .task-list::-webkit-scrollbar-thumb {
+            background: rgb(254, 129, 129); 
+            border-radius: 10px;
+        }
+
+        .task-list::-webkit-scrollbar-thumb:hover {
+            background: rgb(238, 39, 39); 
+        }
+
+        .popup-fill{
+            display: none;
+            position: absolute;
+            background: rgba(0, 0, 0, 0.5);
+            width: 100%;
+            height: 100%;
+            z-index: 15;
+        }
+
+        .popup {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            background: white;
+            border-radius: 10px;
+            z-index: 20;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            display: none;
+            padding: 0;
+            
+        }
+        .popup-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .popup-content input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid rgb(249, 86, 86);
+            border-radius: 8px;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .popup-content input:focus{
+            border: 2px solid rgb(249, 55, 55);
+            outline: 0;
+        }
+        .control-buttons {
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .control-buttons button {
+            padding: 7px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-weight: bold;
+        }
+
+        .control-buttons button:first-child {
+            background-color: red;
+            color: white;
+        }
+
+        .control-buttons button:first-child:hover {
+            background-color: rgb(222, 3, 3);
+        }
+
+        .control-buttons button:last-child {
+            background-color: #ccc;
+            color: #000000;
+        }
+
+        .control-buttons button:last-child:hover {
+            background-color: #bbb;
+        }
+        #message{
+            margin-top: 15px;
+            width: 90%;
+            background-color: rgba(249, 102, 102, 0.231);
+            color:black;
+            padding: 10px;
+            border-left: 5px solid #ff5e5e;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: "Roboto", sans-serif;
+            display: none;
+        }
+
+        .empty-msg{
+            font-family: "Bangers", system-ui;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0.3;
+            letter-spacing: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="fill">
+        <div class="box1"></div>
+        <div class="box2"></div>
+        <div class="box3"></div>
+        <div class="box4"></div>
+        <div class="box5"></div>
+        <div class="box6"></div>
+        <div class="box7"></div>
+        <div class="box8"></div>
+    </div>
+    <div class="top-content">
+        <div class="container">
+            <div class="title"><h1>To-Do list</h1></div>
+            
+            <div class="task-list">
+                <div class="empty-msg"><h1>Add tasks to the list</h1></div>
+            </div>
+            
+            <div class="btn">
+                <button class="add-btn" onclick="read()"><abbr title="Add task">+</abbr></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="popup-fill"></div>
+    <div class="popup">
+        <div class="popup-content">
+            <input type="text" placeholder="Enter your task" id="input-task">
+            <div class="control-buttons">
+                <button onclick="addTask()">Add task</button>
+                <button onclick="closepopup()">Cancel</button>
+            </div>
+            <div id="message"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            loadTasksFromLocalStorage();
+            displayEmptyMsg();
+        });
+
+        function read(){
+            document.getElementsByClassName("popup-fill")[0].style.display="block";
+            document.getElementsByClassName("popup")[0].style.display="block";
+        }
+
+        function closepopup(){
+            document.getElementsByClassName("popup-fill")[0].style.display="none";
+            document.getElementsByClassName("popup")[0].style.display="none";
+        }
+
+        function displayEmptyMsg(){
+            const tasks = document.querySelector('.task-list').querySelectorAll('.task').length;
+            const m=document.getElementsByClassName("empty-msg")[0];
+            if(tasks===0){
+                m.style.display="flex";
+            }
+            else{
+                m.style.display="none";
+            }
+        }
+
+        function saveTasksToLocalStorage() {
+            const taskElements = document.querySelectorAll('.task');
+            const tasks = [];
+            taskElements.forEach(taskElement => {
+                const taskText = taskElement.querySelector('.desc h2').textContent;
+                tasks.push(taskText);
+            });
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+
+        function loadTasksFromLocalStorage() {
+            const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            const taskList = document.getElementsByClassName("task-list")[0];
+            
+            taskList.innerHTML = '<div class="empty-msg"><h1>Add tasks to the list</h1></div>';
+            
+            tasks.forEach(taskText => {
+                taskList.innerHTML += `
+                    <div class="task">
+                        <div class="desc"><h2>${taskText}</h2></div>
+                        <button class="delete" onclick="remove()"><abbr title="remove task">-</abbr></button>
+                    </div>
+                `;
+            });
+        }
+
+        function addTask(){
+            const inp=document.getElementById("input-task");
+            const t=inp.value.trim();
+            if(t==""){
+                document.getElementById("message").innerHTML+=`
+                    <p>Enter valid data...</p>
+                `;
+                document.getElementById("message").style.display="block";
+            }
+            else{
+                const tl=document.getElementsByClassName("task-list")[0];
+                tl.innerHTML+=`
+                    <div class="task">
+                        <div class="desc"><h2>${t}</h2></div>
+                        <button class="delete" onclick="remove()"><abbr title="remove task">-</abbr></button>
+                    </div>
+                `;
+            
+                document.getElementById("message").innerHTML=`
+                    <p>Task added to the list successfully...</p>
+                `;
+                
+                document.getElementById("message").style.display="block";
+                setTimeout(() => {
+                    closepopup();
+                    document.getElementById("message").style.display="none";
+                }, 2000);
+                inp.value="";
+                
+                saveTasksToLocalStorage();
+            }
+            displayEmptyMsg();
+        }
+
+        function remove(){
+            document.querySelector(".task-list").addEventListener("click", e => {
+                if (e.target.closest(".delete")) {
+                    const task = e.target.closest(".task");
+                    task.remove();
+                    saveTasksToLocalStorage();
+                    displayEmptyMsg();
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            remove();
+        });
+    </script>
+</body>
+</html>
