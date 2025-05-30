@@ -1,7 +1,9 @@
 To-Do List Web Application:
+
 This is a simple web application for managing your tasks with a visually appealing interface. You can add tasks, mark them as completed, and remove them as needed. The application uses HTML, CSS for styling, and JavaScript for dynamic functionality.
 
 Features:
+
 Add Tasks: Click on the '+' button to add a new task.
 
 Remove Tasks: Each task has a '-' button to remove it from the list.
