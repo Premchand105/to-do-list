@@ -13,6 +13,7 @@ Local Storage: Tasks are stored in the browser's local storage, so they persist 
 Responsive Design: The application adjusts for different screen sizes using media queries.
 
 How to Use:
+
 Add Task: Click on the '+' button, enter your task in the popup, and click 'Add task'.
 
 Remove Task: Click on the '-' button next to each task to remove it from the list.
